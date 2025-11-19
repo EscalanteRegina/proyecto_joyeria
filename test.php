@@ -1,2 +1,0 @@
-<?php
-echo "HOLA DESDE PROYECTO JOYERIA";
