@@ -1,3 +1,8 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -5,14 +10,12 @@
   <title>Joyas & Bolsas - Tienda en línea</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 
-  <!-- Tu CSS -->
   <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
-  <!-- Navbar -->
+
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">Joyas&Bolsas</a>
@@ -23,45 +26,49 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
 
-          <!-- Catálogo de productos -->
           <li class="nav-item">
             <a class="nav-link" href="catalogo.php">Catálogo</a>
           </li>
 
-          <!-- Página de información del usuario -->
           <li class="nav-item">
             <a class="nav-link" href="usuario.php">Mi perfil</a>
           </li>
 
-          <!-- Creación de nueva cuenta -->
-          <li class="nav-item">
-            <a class="nav-link" href="registro.php">Crear cuenta</a>
-          </li>
-
-          <!-- Carrito -->
           <li class="nav-item">
             <a class="nav-link" href="carrito.php">Carrito</a>
           </li>
 
-          <!-- Historial de compras -->
           <li class="nav-item">
             <a class="nav-link" href="historial.php">Historial</a>
           </li>
 
-          <!-- Admin -->
           <li class="nav-item">
             <a class="nav-link" href="admin.php">Admin</a>
           </li>
 
-          <!-- Contacto -->
           <li class="nav-item">
             <a class="nav-link" href="contacto.php">Contacto</a>
           </li>
 
-          <!-- Login -->
-          <li class="nav-item">
-            <a class="nav-link" href="login.php">Iniciar sesión</a>
-          </li>
+          <?php if (isset($_SESSION['usuario_id'])): ?>
+
+            <li class="nav-item">
+              <span class="nav-link">
+                Hola, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?>
+              </span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="logout.php">Cerrar sesión</a>
+            </li>
+          <?php else: ?>
+
+            <li class="nav-item">
+              <a class="nav-link" href="registro.php">Crear cuenta</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.php">Iniciar sesión</a>
+            </li>
+          <?php endif; ?>
 
         </ul>
       </div>
@@ -69,3 +76,4 @@
   </nav>
 
   <main class="container my-4">
+
