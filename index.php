@@ -3,26 +3,44 @@ require 'conexion.php';
 include 'includes/header.php';
 ?>
 
-<div class="p-5 mb-4 bg-light rounded-3">
-  <div class="container-fluid py-5">
-    <h1 class="display-5 fw-bold">Joyas & Bolsas</h1>
-
-    <?php if (isset($_SESSION['usuario_id'])): ?>
-      <p class="col-md-8 fs-4">
-        Bienvenida, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?>.  
-        Explora el catálogo y revisa tu carrito o historial de compras.
-      </p>
-      <a href="catalogo.php" class="btn btn-primary btn-lg">Ver catálogo</a>
-    <?php else: ?>
-      <p class="col-md-8 fs-4">
-        Crea tu cuenta para guardar tus compras, ver tu historial y hacer pedidos
-        de nuestras joyas y bolsas favoritas.
-      </p>
-      <a href="registro.php" class="btn btn-primary btn-lg me-2">Crear cuenta</a>
-      <a href="login.php" class="btn btn-outline-secondary btn-lg">Iniciar sesión</a>
-    <?php endif; ?>
+<!-- HERO BANNER -->
+<div class="hero-banner mb-5">
+  <div class="hero-overlay">
+    <h1 class="hero-title">Nueva colección 2025</h1>
+    <p class="hero-subtitle">
+      Bolsas y joyería diseñadas para inspirar cada día.
+    </p>
+    <a href="catalogo.php" class="btn btn-primary hero-btn">Comprar ahora</a>
   </div>
 </div>
 
-<?php include 'includes/footer.php'; ?>
+<!-- HERO SECUNDARIO (con imagen y contenido alineado a la derecha) -->
+<div class="hero-banner-sec mb-5">
+  <div class="hero-overlay-sec d-flex flex-column align-items-end text-end">
 
+    <h1 class="hero-title">PEONIA STORE</h1>
+
+    <?php if (isset($_SESSION['usuario_id'])): ?>
+      <p class="hero-subtitle">
+        Bienvenida, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?>.<br>
+        Explora el catálogo y revisa tu carrito o historial de compras.
+      </p>
+      <a href="catalogo.php" class="btn btn-primary hero-btn">Ver catálogo</a>
+
+    <?php else: ?>
+      <p class="hero-subtitle">
+        Crea tu cuenta para guardar tus compras y descubrir nuestra colección exclusiva.
+      </p>
+    <div class="d-flex justify-content-start align-items-center gap-3 mt-3 flex-wrap">
+      <a href="registro.php" class="btn btn-primary btn-lg px-4">Crear cuenta</a>
+      <a href="login.php" class="btn btn-outline-secondary btn-lg px-4">Iniciar sesión</a>
+    </div>
+
+    <?php endif; ?>
+
+  </div>
+</div>
+
+
+<?php include 'includes/footer.php'; 
+?>

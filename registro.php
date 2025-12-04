@@ -9,15 +9,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email     = trim($_POST['email'] ?? '');
     $password  = $_POST['password']  ?? '';
     $password2 = $_POST['password2'] ?? '';
+    $fecha_nac = $_POST['fecha_nacimiento'] ?? '';
+    $tarjeta   = trim($_POST['tarjeta'] ?? '');
+    $direccion = trim($_POST['direccion'] ?? '');
 
-    if ($nombre === "" || $email === "" || $password === "" || $password2 === "") {
+    // Validaciones básicas
+    if (
+        $nombre === "" || $email === "" || $password === "" || $password2 === "" ||
+        $fecha_nac === "" || $tarjeta === "" || $direccion === ""
+    ) {
         $errores = "Todos los campos son obligatorios.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errores = "El correo no tiene un formato válido.";
     } elseif ($password !== $password2) {
         $errores = "Las contraseñas no coinciden.";
+    } elseif (!preg_match('/^[0-9]{16}$/', $tarjeta)) { 
+        $errores = "El número de tarjeta debe tener 16 dígitos.";
     } else {
-        // ¿ya existe ese correo?
         $sql  = "SELECT id_usuario FROM usuario WHERE email = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $email);
@@ -29,12 +37,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $hash = password_hash($password, PASSWORD_DEFAULT);
 
-            $sql_insert  = "INSERT INTO usuario (nombre, email, password) VALUES (?, ?, ?)";
+            $sql_insert  = "INSERT INTO usuario 
+                            (nombre, email, password, fecha_nacimiento, tarjeta, direccion) 
+                            VALUES (?, ?, ?, ?, ?, ?)";
             $stmt_insert = $conn->prepare($sql_insert);
-            $stmt_insert->bind_param("sss", $nombre, $email, $hash);
+            $stmt_insert->bind_param(
+                "ssssss",
+                $nombre,
+                $email,
+                $hash,
+                $fecha_nac,
+                $tarjeta,
+                $direccion
+            );
 
             if ($stmt_insert->execute()) {
-                $exito = "Cuenta creada correctamente. Ya puedes iniciar sesión.";
+                $exito   = "Cuenta creada correctamente. Ya puedes iniciar sesión.";
+                $nombre = $email = $fecha_nac = $tarjeta = $direccion = "";
             } else {
                 $errores = "Error al crear la cuenta.";
             }
@@ -70,6 +89,26 @@ include 'includes/header.php';
     <label for="email" class="form-label">Correo electrónico</label>
     <input type="email" name="email" id="email" class="form-control"
            value="<?php echo htmlspecialchars($email ?? ''); ?>">
+  </div>
+
+  <div class="mb-3">
+    <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento</label>
+    <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control"
+           value="<?php echo htmlspecialchars($fecha_nac ?? ''); ?>">
+  </div>
+
+  <div class="mb-3">
+    <label for="tarjeta" class="form-label">Número de tarjeta</label>
+    <input type="text" name="tarjeta" id="tarjeta" class="form-control"
+           maxlength="16"
+           value="<?php echo htmlspecialchars($tarjeta ?? ''); ?>">
+  </div>
+
+  <div class="mb-3">
+    <label for="direccion" class="form-label">Dirección</label>
+    <textarea name="direccion" id="direccion" class="form-control" rows="2"><?php 
+        echo htmlspecialchars($direccion ?? ''); 
+    ?></textarea>
   </div>
 
   <div class="mb-3">
