@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Si no hay usuario en sesión, mandamos a login
+
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: login.php");
     exit();
@@ -15,17 +15,17 @@ require 'conexion.php';
 
 $id_usuario = (int) $_SESSION['usuario_id'];
 
-// 1. Manejar actualizaciones de cantidad o eliminación
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    // Actualizar cantidad
+
     if (isset($_POST['accion']) && $_POST['accion'] === 'actualizar') {
         $id_carrito = (int) ($_POST['id_carrito'] ?? 0);
         $cantidad   = (int) ($_POST['cantidad'] ?? 0);
 
         if ($id_carrito > 0) {
             if ($cantidad <= 0) {
-                // Si la cantidad es 0 o menor, eliminamos
+
                 $sql_del = "DELETE FROM carrito 
                             WHERE id_carrito = ? AND id_usuario = ?";
                 $stmt_del = $conn->prepare($sql_del);
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $stmt_del->execute();
                 $stmt_del->close();
             } else {
-                // Si es mayor que 0, actualizamos la cantidad
+
                 $sql_upd = "UPDATE carrito 
                             SET cantidad = ? 
                             WHERE id_carrito = ? AND id_usuario = ?";
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    // Eliminar un producto del carrito
+
     if (isset($_POST['accion']) && $_POST['accion'] === 'eliminar') {
         $id_carrito = (int) ($_POST['id_carrito'] ?? 0);
 
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-// 2. Consultar los productos del carrito de este usuario
+
 $sql = "SELECT c.id_carrito,
                c.cantidad,
                p.id_producto,

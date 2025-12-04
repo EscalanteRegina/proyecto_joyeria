@@ -1,11 +1,11 @@
-/* Fuente general */
+
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #f7f4f0;   /* fondo clarito */
+  background-color: #f7f4f0;   
   color: #333;
 }
 
-/* Navbar */
+
 .navbar {
   background-color: #ffffff !important;
   border-bottom: 1px solid #e3d9c8;
@@ -21,16 +21,16 @@ body {
 }
 
 .nav-link:hover {
-  color: #c79b63 !important;   /* doradito */
+  color: #c79b63 !important;   
 }
 
-/* Títulos */
+
 h1, h2, h3, h4 {
   font-weight: 600;
   color: #2b2620;
 }
 
-/* Tarjetas de productos */
+
 .card {
   border: none;
   border-radius: 16px;
@@ -40,14 +40,14 @@ h1, h2, h3, h4 {
 .card img {
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  max-height: 260px;      /* o quita esta línea si quieres altura libre */
+  max-height: 260px;      
   width: 100%;
-  object-fit: contain;    /* ajusta sin recortar */
-  background-color: #f7f4f0;  /* color de fondo detrás de la imagen */
+  object-fit: contain;    
+  background-color: #f7f4f0;  
 }
 
 
-/* Botones principales */
+
 .btn-primary {
   background-color: #c79b63;
   border-color: #c79b63;
@@ -58,7 +58,7 @@ h1, h2, h3, h4 {
   border-color: #b2854b;
 }
 
-/* Footer sencillo (si lo tienes) */
+
 footer {
   border-top: 1px solid #e3d9c8;
   color: #777;
@@ -85,7 +85,7 @@ footer {
   background-color: #ffffff;
 }
 
-/* Tabla del carrito */
+
 .carrito-tabla thead {
   border-bottom: 1px solid #e8ded0;
 }
@@ -107,7 +107,7 @@ footer {
   font-weight: 500;
 }
 
-/* Imagen del carrito */
+
 .carrito-imagen-col {
   width: 140px;
 }
@@ -121,7 +121,7 @@ footer {
   padding: 4px;
 }
 
-/* Cantidad */
+
 .carrito-form-cantidad {
   max-width: 220px;
 }
@@ -131,7 +131,7 @@ footer {
   text-align: center;
 }
 
-/* Total y botón finalizar */
+
 .carrito-total-box {
   display: flex;
   flex-wrap: wrap;
@@ -152,13 +152,13 @@ footer {
   color: #2b2620;
 }
 
-/* Botón finalizar compra */
+
 .carrito-boton-finalizar {
   min-width: 200px;
   text-align: center;
 }
 
-/* Carrito vacío */
+
 .carrito-vacio h4 {
   color: #2b2620;
 }
@@ -167,7 +167,7 @@ footer {
   color: #6c6459;
 }
 
-/* Responsive ajustes para pantallas chicas */
+
 @media (max-width: 768px) {
   .carrito-tabla thead {
     display: none;
@@ -230,7 +230,7 @@ footer {
   background-color: #ffffff;
 }
 
-/* Tabla historial */
+
 .historial-tabla thead {
   border-bottom: 1px solid #e8ded0;
 }
@@ -257,7 +257,7 @@ footer {
   font-weight: 500;
 }
 
-/* Imagen */
+
 .historial-imagen-col {
   width: 140px;
 }
@@ -271,7 +271,7 @@ footer {
   padding: 4px;
 }
 
-/* Total y botón */
+
 .historial-total-box {
   display: flex;
   flex-wrap: wrap;
@@ -296,7 +296,7 @@ footer {
   min-width: 200px;
 }
 
-/* Historial vacío */
+
 .historial-vacio h4 {
   color: #2b2620;
 }
@@ -305,7 +305,7 @@ footer {
   color: #6c6459;
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
   .historial-tabla thead {
     display: none;
@@ -360,7 +360,7 @@ footer {
   margin: 0 auto 2.5rem auto;
 }
 
-/* Tarjetas resumen */
+
 .admin-resumen-card {
   border-radius: 16px;
   border: none;
@@ -379,7 +379,7 @@ footer {
   font-size: 1.2rem;
 }
 
-/* Lista de productos */
+
 .admin-card-lista {
   border-radius: 18px;
   border: none;
@@ -408,7 +408,7 @@ footer {
   font-weight: 500;
 }
 
-/* Responsive admin */
+
 @media (max-width: 768px) {
   .admin-wrapper {
     padding: 0 0.5rem;
@@ -474,7 +474,7 @@ footer {
 .hero-banner {
   width: 100%;
   height: 380px;
-  background-image: url("../img/sand.jpg"); /* AJUSTA EL NOMBRE A TU IMAGEN */
+  background-image: url("../img/sand.jpg"); 
   background-size: cover;
   background-position: center;
   position: relative;
@@ -532,10 +532,10 @@ footer {
   position: absolute;
   inset: 0;
   padding: 40px;
-  background: rgba(0, 0, 0, 0.30); /* overlay suave */
+  background: rgba(0, 0, 0, 0.30); 
   border-radius: 20px;
   color: white;
-  justify-content: center; /* centra verticalmente */
+  justify-content: center; 
 }
 
 .hero-overlay-sec .hero-title {

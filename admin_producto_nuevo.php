@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require 'conexion.php';
 
-// Verificar sesión
+
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: login.php");
     exit();
@@ -15,7 +15,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
 $id_usuario = (int) $_SESSION['usuario_id'];
 
-// Verificar que sea admin
+
 $sql_admin = "SELECT es_admin FROM usuario WHERE id_usuario = ?";
 $stmt_admin = $conn->prepare($sql_admin);
 $stmt_admin->bind_param("i", $id_usuario);
@@ -36,7 +36,7 @@ if ((int)$admin_data['es_admin'] !== 1) {
     exit();
 }
 
-// Variables para mensajes y para repoblar el formulario
+
 $errores = "";
 $exito   = "";
 
@@ -48,7 +48,7 @@ $imagen = "";
 $id_categoria = "";
 $activo = 1;
 
-// Obtener categorías para el select
+
 $sql_cat = "SELECT id_categoria, nombre 
             FROM categorias
             ORDER BY nombre ASC";
@@ -61,7 +61,7 @@ if ($res_cat && $res_cat->num_rows > 0) {
     }
 }
 
-// Procesar el formulario
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nombre       = trim($_POST['nombre'] ?? '');
     $descripcion  = trim($_POST['descripcion'] ?? '');
@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($nombre === "" || $precio === "" || $stock === "" || $id_categoria <= 0) {
         $errores = "Nombre, precio, stock y categoría son obligatorios.";
     } else {
-        // Intentar convertir precio y stock a números
+
         if (!is_numeric($precio) || !is_numeric($stock)) {
             $errores = "Precio y stock deben ser valores numéricos.";
         } else {
@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             if ($stmt_ins->execute()) {
                 $exito = "Producto agregado correctamente.";
-                // Limpiar campos
+
                 $nombre = "";
                 $descripcion = "";
                 $precio = "";
@@ -173,9 +173,7 @@ include 'includes/header.php';
           <input type="text" name="imagen" class="form-control"
                  placeholder="ej: bolsa_negra.png"
                  value="<?php echo htmlspecialchars($imagen); ?>">
-          <div class="form-text">
-            Recuerda guardar el archivo dentro de la carpeta <code>img/</code> de tu proyecto.
-          </div>
+
         </div>
 
         <div class="form-check mb-3">

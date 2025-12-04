@@ -11,7 +11,7 @@ include 'includes/header.php';
 <div class="contacto-wrapper mb-5">
 
   <div class="row g-4">
-    <!-- Datos de la tienda -->
+
     <div class="col-md-6">
       <div class="card contacto-card">
         <div class="card-body">
@@ -48,7 +48,6 @@ include 'includes/header.php';
       </div>
     </div>
 
-    <!-- Formulario de contacto (simulado) -->
     <div class="col-md-6">
       <div class="card contacto-card">
         <div class="card-body">

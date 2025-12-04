@@ -14,7 +14,7 @@ include 'includes/header.php';
   </div>
 </div>
 
-<!-- HERO SECUNDARIO (con imagen y contenido alineado a la derecha) -->
+<!-- HERO SECUNDARIO -->
 <div class="hero-banner-sec mb-5">
   <div class="hero-overlay-sec d-flex flex-column align-items-end text-end">
 

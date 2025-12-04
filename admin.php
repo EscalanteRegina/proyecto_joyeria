@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require 'conexion.php';
 
-// 1. Verificar que el usuario haya iniciado sesión
+
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: login.php");
     exit();
@@ -15,7 +15,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
 $id_usuario = (int) $_SESSION['usuario_id'];
 
-// 2. Verificar si el usuario es administrador
+
 $sql_admin = "SELECT es_admin, nombre FROM usuario WHERE id_usuario = ?";
 $stmt_admin = $conn->prepare($sql_admin);
 $stmt_admin->bind_param("i", $id_usuario);
@@ -32,25 +32,23 @@ $admin_data = $result_admin->fetch_assoc();
 $stmt_admin->close();
 
 if ((int)$admin_data['es_admin'] !== 1) {
-    // No es admin => lo sacamos
     header("Location: index.php");
     exit();
 }
 
-// 3. Consultar algunos datos para el panel
-// Total de productos
+
 $sql_prod = "SELECT COUNT(*) AS total_productos,
                     SUM(stock) AS total_stock
              FROM producto";
 $res_prod = $conn->query($sql_prod);
 $datos_prod = $res_prod ? $res_prod->fetch_assoc() : ['total_productos' => 0, 'total_stock' => 0];
 
-// Total de usuarios
+
 $sql_usuarios = "SELECT COUNT(*) AS total_usuarios FROM usuario";
 $res_usuarios = $conn->query($sql_usuarios);
 $datos_usuarios = $res_usuarios ? $res_usuarios->fetch_assoc() : ['total_usuarios' => 0];
 
-// Total de compras en historial
+
 $sql_hist = "SELECT COUNT(*) AS total_registros,
                     COALESCE(SUM(h.cantidad * p.precio), 0) AS total_vendido
              FROM historial h
@@ -58,7 +56,7 @@ $sql_hist = "SELECT COUNT(*) AS total_registros,
 $res_hist = $conn->query($sql_hist);
 $datos_hist = $res_hist ? $res_hist->fetch_assoc() : ['total_registros' => 0, 'total_vendido' => 0];
 
-// 4. Listar productos para administración rápida
+
 $sql_lista = "SELECT id_producto, nombre, precio, stock, activo
               FROM producto
               ORDER BY nombre ASC";
@@ -75,7 +73,7 @@ include 'includes/header.php';
 
 <div class="admin-wrapper">
 
-  <!-- Tarjetas resumen -->
+
   <div class="row g-3 mb-4">
     <div class="col-md-4">
       <div class="card admin-resumen-card">
@@ -120,12 +118,12 @@ include 'includes/header.php';
     </div>
   </div>
 
-  <!-- Bloque de productos -->
+
   <div class="card admin-card-lista">
     <div class="card-body">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h5 class="mb-0">Gestión de productos</h5>
-        <!-- Más adelante podemos hacer admin_producto_nuevo.php -->
+
         <a href="admin_producto_nuevo.php" class="btn btn-primary btn-sm">
           Agregar nuevo producto
         </a>

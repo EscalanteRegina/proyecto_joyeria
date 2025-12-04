@@ -29,7 +29,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
 
-        <!-- Siempre visibles -->
+
         <li class="nav-item">
           <a class="nav-link" href="catalogo.php">Catálogo</a>
         </li>
@@ -62,7 +62,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
         <?php else: ?>
 
-          <!-- Visible solo si NO hay sesión -->
+
           <li class="nav-item">
             <a class="nav-link" href="registro.php">Crear cuenta</a>
           </li>

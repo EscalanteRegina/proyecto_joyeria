@@ -1,5 +1,5 @@
 <?php
-// admin_producto_editar.php
+
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require 'conexion.php';
 
-// Verificar sesión
+
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: login.php");
     exit();
@@ -15,7 +15,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
 $id_usuario = (int) $_SESSION['usuario_id'];
 
-// Verificar que sea admin
+
 $sql_admin = "SELECT es_admin FROM usuario WHERE id_usuario = ?";
 $stmt_admin = $conn->prepare($sql_admin);
 $stmt_admin->bind_param("i", $id_usuario);
@@ -36,7 +36,7 @@ if ((int)$admin_data['es_admin'] !== 1) {
     exit();
 }
 
-// Obtener ID de producto desde la URL
+
 $id_producto = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 if ($id_producto <= 0) {
     header("Location: admin.php");
@@ -46,7 +46,7 @@ if ($id_producto <= 0) {
 $errores = "";
 $exito   = "";
 
-// Obtener categorías
+
 $sql_cat = "SELECT id_categoria, nombre 
             FROM categorias
             ORDER BY nombre ASC";
@@ -58,7 +58,7 @@ if ($res_cat && $res_cat->num_rows > 0) {
     }
 }
 
-// Obtener datos actuales del producto
+
 $sql_prod = "SELECT id_producto, nombre, descripcion, precio, stock, imagen, id_categoria, activo
              FROM producto
              WHERE id_producto = ?";
@@ -76,7 +76,7 @@ if (!$res_prod || $res_prod->num_rows === 0) {
 $producto = $res_prod->fetch_assoc();
 $stmt_prod->close();
 
-// Inicializar variables para el formulario
+
 $nombre       = $producto['nombre'];
 $descripcion  = $producto['descripcion'];
 $precio       = $producto['precio'];
@@ -85,7 +85,7 @@ $imagen       = $producto['imagen'];
 $id_categoria = $producto['id_categoria'];
 $activo       = (int)$producto['activo'];
 
-// Procesar actualización
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nombre       = trim($_POST['nombre'] ?? '');
     $descripcion  = trim($_POST['descripcion'] ?? '');

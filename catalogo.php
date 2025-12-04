@@ -22,12 +22,12 @@ $result = $conn->query($sql);
         <div class="card h-100">
 
           <?php if (!empty($row['imagen'])): ?>
-            <!-- Asumo que en la BD guardas solo el nombre, por ejemplo "anillo1.jpg" -->
+
             <img src="img/<?php echo htmlspecialchars($row['imagen']); ?>"
                  class="card-img-top img-fluid"
                  alt="<?php echo htmlspecialchars($row['nombre']); ?>">
           <?php else: ?>
-            <!-- Placeholder si no hay imagen -->
+
             <div class="card-img-top d-flex align-items-center justify-content-center"
                  style="height: 200px; background-color: #f8f9fa;">
               <span class="text-muted">Sin imagen</span>
@@ -53,7 +53,6 @@ $result = $conn->query($sql);
               En stock: <?php echo (int)$row['stock']; ?>
             </p>
 
-            <!-- Aquí luego conectaremos con el carrito -->
             <form method="post" action="agregar_carrito.php" class="mt-auto">
               <input type="hidden" name="id_producto"
                      value="<?php echo (int)$row['id_producto']; ?>">

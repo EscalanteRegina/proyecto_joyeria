@@ -6,14 +6,14 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Si el usuario NO ha iniciado sesión, lo mandamos a login
+
 if (!isset($_SESSION['usuario_id'])) {
-    // Puedes mandar un mensaje en la URL si quieres
+
     header("Location: login.php");
     exit();
 }
 
-// Verificar que venga por POST y que mandaron id_producto
+
 if ($_SERVER["REQUEST_METHOD"] !== "POST" || !isset($_POST['id_producto'])) {
     header("Location: catalogo.php");
     exit();
@@ -27,7 +27,7 @@ if ($id_producto <= 0) {
     exit();
 }
 
-// Revisar si ese producto YA estaba en el carrito del usuario
+
 $sql  = "SELECT cantidad FROM carrito WHERE id_usuario = ? AND id_producto = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ii", $id_usuario, $id_producto);
@@ -35,7 +35,7 @@ $stmt->execute();
 $stmt->store_result();
 
 if ($stmt->num_rows > 0) {
-    // Ya existe: sumamos 1
+
     $stmt->bind_result($cantidad_actual);
     $stmt->fetch();
     $stmt->close();
@@ -51,7 +51,7 @@ if ($stmt->num_rows > 0) {
     $stmt2->close();
 
 } else {
-    // No existía: lo insertamos con cantidad = 1
+
     $stmt->close();
 
     $cantidad_inicial = 1;
@@ -63,6 +63,5 @@ if ($stmt->num_rows > 0) {
     $stmt2->close();
 }
 
-// Al final, redirigimos al carrito
 header("Location: carrito.php");
 exit();
